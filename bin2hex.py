@@ -27,7 +27,7 @@ with open(sys.argv[2]) as file:
             if format == 'net': sc += "\n0x{},".format(hex)
             else: sc += "\n\"\\x{}".format(hex)
         elif count % 16 == 15 and format != 'net':
-            sc += '"'
+            sc += "\\x{}\"".format(hex)
         else: sc += "0x{},".format(hex) if format == 'net' else "\\x{}".format(hex)
         bytes += 1
         count += 1
