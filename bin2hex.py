@@ -32,11 +32,12 @@ with open(sys.argv[2]) as file:
         bytes += 1
         count += 1
     if format == 'net':
-        sc = sc[:-1] + '\n'
-    else:
-        sc += '"\n'
+        sc = sc[:-1]
     output = open(sys.argv[3], 'w')
-    output.write(sc)
+    if format == 'c':
+        output.write("\n// Size of bytes: {}\n\nunsigned char buf[] = {}\";\n".format(bytes,sc))
+    else:
+        output.write("\n// Size of bytes: {}\n\nbyte[] buf = new byte[] {{ {} }};\n".format(bytes,sc))
     output.close()
 
 print("[*] Output saved to: {}".format(sys.argv[3]))
